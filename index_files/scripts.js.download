@@ -1,0 +1,81 @@
+/* Pause / Play Button for Home Page Video */
+var videos = document.getElementsByClassName("masthead__video");
+var playPauseButtons = document.getElementsByClassName("pause-btn");
+
+// Add click event listeners to all buttons
+for (var i = 0; i < playPauseButtons.length; i++) {
+  playPauseButtons[i].addEventListener("click", function () {
+    // Find the associated video element
+    var video = this.previousElementSibling;
+
+    // Check if the video is paused, and toggle play/pause accordingly
+    if (video.paused) {
+      video.play();
+      //this.textContent = "Pause";
+      this.getElementsByTagName("i")[0].classList.remove("bx-play");
+      this.getElementsByTagName("i")[0].classList.add("bx-pause");
+    } else {
+      video.pause();
+      //this.textContent = "Play";
+      this.getElementsByTagName("i")[0].classList.remove("bx-pause");
+      this.getElementsByTagName("i")[0].classList.add("bx-play");
+    }
+  });
+}
+
+
+// Back to top button
+window.addEventListener('scroll', function() {
+    if (window.scrollY >= 50) {
+        document.querySelector('.back-to-top').classList.add('show');
+    } else {
+        document.querySelector('.back-to-top').classList.remove('show');
+    }
+});
+
+document.querySelector('.back-to-top').addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+/* Fix Parallax for iOS */
+document.addEventListener("DOMContentLoaded", function() {
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent) && !window.MSStream) {
+        document.querySelectorAll('.parallax').forEach(element => {
+            element.classList.remove('parallax');
+        });
+    }
+});
+
+
+/* Updates Arial Label for Dropdown Menu */
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("navbarDropdownMenuLink");
+  if (!toggle) { 
+    return;
+  }
+  
+  const dropdown = toggle.nextElementSibling;
+
+  // Update aria-expanded to true on hover
+  toggle.addEventListener("mouseenter", function () {
+    toggle.setAttribute("aria-expanded", "true");
+  });
+
+  // Update aria-expanded to false when mouse leaves the toggle or dropdown
+  toggle.addEventListener("mouseleave", function () {
+    toggle.setAttribute("aria-expanded", "false");
+  });
+
+  dropdown.addEventListener("mouseleave", function () {
+    toggle.setAttribute("aria-expanded", "false");
+  });
+
+  dropdown.addEventListener("mouseenter", function () {
+    toggle.setAttribute("aria-expanded", "true");
+  });
+});
+
+
